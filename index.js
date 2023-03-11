@@ -2,6 +2,7 @@ const express = require("express");
 const body_parser = require("body-parser");
 const pdf = require("html-pdf");
 const cors = require("cors");
+const path = require("path");
 
 const pdfTemplate = require("./documents")
 
@@ -23,8 +24,10 @@ app.post("/create-pdf", (req,res)=>{
 })
 
 app.get("/fetch-pdf",(req,res)=>{
-    console.log(__dirname)
-    res.sendFile(`${__dirname}/result.pdf`)
+    // res.sendFile(`../result.pdf`)
+    const filePath = path.join(__dirname,'result.pdf');
+    // const filename = 'result.pdf';
+    res.download(filePath);
 })
 
 app.listen(port,()=>{console.log(`listening at port : ${port}`)})
